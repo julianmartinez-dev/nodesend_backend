@@ -17,8 +17,10 @@
   "author": "Julian Martinez",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-validator": "^6.14.0",
     "mongoose": "^6.3.4"
   },
   "devDependencies": {
