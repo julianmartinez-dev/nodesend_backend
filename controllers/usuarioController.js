@@ -10,8 +10,8 @@ const nuevoUsuario = async (req, res) => {
   }
   const { email, password } = req.body;
 
+  //Revisar si el usuario existe
   const usuarioExiste = await Usuario.findOne({ email: email });
-
   if (usuarioExiste) {
     res.status(400).json({ msg: 'El usuario ya existe' });
     return;
@@ -26,7 +26,7 @@ const nuevoUsuario = async (req, res) => {
   //Guardar el usuario
   try {
     await usuario.save();
-    res.status(200).json({msg:'Usuario creado correctamente'});
+    res.status(200).json({ msg: 'Usuario creado correctamente' });
   } catch (error) {
     console.log(error);
   }
