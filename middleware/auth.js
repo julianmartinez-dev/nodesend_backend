@@ -10,7 +10,6 @@ const authMiddleware = (req, res, next) => {
      try {
        //Comprobar el jwtoken
        const usuario = jwt.verify(token, process.env.JWT_SECRET);
-
        //si el usuario esta autenticado lo enviamos al controlador
        req.usuario = usuario;
      } catch (error) {

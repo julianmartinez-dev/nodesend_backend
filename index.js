@@ -3,6 +3,7 @@ import conectarDB from './config/db.js';
 import usuariosRoutes from './routes/usuarios.js';
 import authRoutes from './routes/auth.js';
 import enlacesRoutes from './routes/enlaces.js'
+import archivosRoutes from './routes/archivos.js'
 
 
 //Crear servidor
@@ -22,6 +23,7 @@ const port = process.env.PORT || 4000;
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/enlaces', enlacesRoutes)
+app.use('/api/archivos', archivosRoutes)
 
 //Arrancar el servidor
 app.listen(port, () => {
