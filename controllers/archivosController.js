@@ -1,5 +1,6 @@
 import multer from 'multer';
 import { nanoid } from 'nanoid';
+import * as fs from 'fs'
 
 
 
@@ -33,6 +34,14 @@ const subirArchivo = async (req, res, next) => {
   });
 };
 
-const eliminarArchivo = async (req, res) => {};
+const eliminarArchivo = async (req, res) => {
+
+  try {
+    fs.unlinkSync(`uploads/${req.archivo}`);
+    console.log('Archivo eliminado')
+  } catch (error) {
+    console.log(error)
+  }
+};
 
 export { subirArchivo, eliminarArchivo };

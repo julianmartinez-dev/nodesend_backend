@@ -6,7 +6,5 @@ import authMiddleware from '../middleware/auth.js';
 
 router.post('/',authMiddleware, subirArchivo)
 
-router.delete('/:id', eliminarArchivo)
-
 
 export default router;

@@ -1,7 +1,8 @@
 import express from 'express';
 import { check } from 'express-validator';
 const router = express.Router();
-import { nuevoEnlace } from '../controllers/enlacesController.js';
+import { nuevoEnlace, obtenerEnlace } from '../controllers/enlacesController.js';
+import { eliminarArchivo } from '../controllers/archivosController.js';
 import authMiddleware from '../middleware/auth.js';
 
 router.post('/',[
@@ -9,5 +10,6 @@ router.post('/',[
     check('nombre_original', 'Sube un archivo').notEmpty()
 ], authMiddleware, nuevoEnlace);
 
+router.get('/:url', obtenerEnlace, eliminarArchivo)
 
 export default router;
