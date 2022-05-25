@@ -10,10 +10,10 @@ const nuevoEnlace = async (req, res) => {
     return res.status(400).json({ errores: errores.array() });
   }
   //Craer el nuevo enlace
-  const { nombre_original } = req.body;
+  const { nombre_original, nombre } = req.body;
   const enlace = new Enlaces();
   enlace.url = nanoid(12);
-  enlace.nombre = nanoid(12);
+  enlace.nombre = nombre;
   enlace.nombre_original = nombre_original;
 
   //Si el usuario esta autenticado
@@ -36,7 +36,7 @@ const nuevoEnlace = async (req, res) => {
   //Almacenar en la base de datos
   try {
     await enlace.save();
-    return res.json({ msg: `${enlace.url}` });
+    return res.json({ url: `${enlace.url}` });
     next();
   } catch (error) {
     console.log(error);
@@ -58,15 +58,19 @@ const obtenerEnlace = async (req, res, next) => {
 
   res.json({ archivo: enlace.nombre });
 
-  if (enlace.descargas === 1) {
- 
-    req.archivo = enlace.nombre;
-    await Enlaces.findOneAndRemove({ url });
-    next(); //Ir al siguiente middleware (eliminarArchivo)
-  } else {
-    enlace.descargas--;
-    await enlace.save();
-  }
+  next();
+
+  
 };
 
-export { nuevoEnlace, obtenerEnlace };
+//Obtiene un listado de todos los enlaces
+const todosEnlaces = async (req, res) => {
+  try {
+    const enlaces = await Enlaces.find({}).select('url -_id');
+    res.json( {enlaces} );
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { nuevoEnlace, obtenerEnlace, todosEnlaces };

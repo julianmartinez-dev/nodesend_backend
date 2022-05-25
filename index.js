@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import conectarDB from './config/db.js';
 import usuariosRoutes from './routes/usuarios.js';
 import authRoutes from './routes/auth.js';
@@ -16,8 +17,18 @@ app.use(express.json());
 //Conectar a la base de datos
 conectarDB();
 
+//Habilitar CORS
+const corsOptions = {
+    origin: process.env.FRONTEND_URL
+}
+app.use(cors(corsOptions));
+
 //Puerto de la App
 const port = process.env.PORT || 4000;
+
+
+//Habilitar carpeta publica
+app.use(express.static('uploads'));
 
 //Rutas de la app
 app.use('/api/usuarios', usuariosRoutes);
