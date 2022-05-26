@@ -1,7 +1,13 @@
 import express from 'express';
 import { check } from 'express-validator';
 const router = express.Router();
-import { nuevoEnlace, obtenerEnlace, todosEnlaces } from '../controllers/enlacesController.js';
+import {
+  nuevoEnlace,
+  obtenerEnlace,
+  todosEnlaces,
+  tienePassword,
+  verificarPassword,
+} from '../controllers/enlacesController.js';
 import authMiddleware from '../middleware/auth.js';
 
 router.post('/',[
@@ -11,6 +17,8 @@ router.post('/',[
 
 router.get('/', todosEnlaces);
 
-router.get('/:url', obtenerEnlace)
+router.get('/:url',tienePassword, obtenerEnlace)
+
+router.post('/:url',verificarPassword, obtenerEnlace)
 
 export default router;

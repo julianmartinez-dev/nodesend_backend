@@ -6,7 +6,7 @@ import Enlaces from '../models/Enlace.js';
 const subirArchivo = async (req, res, next) => {
   //Configuracion para subir Archivo
   const configuracionMulter = {
-    limits: { fileSize: req.usuario ? 1024 * 1024 * 10 : 1024 * 1024 },
+    limits: { fileSize: req.usuario ? 1024 * 1024 * 20 : 1024 * 1024 },
     storage: multer.diskStorage({
       destination: (req, file, cb) => {
         cb(null, 'uploads/');
